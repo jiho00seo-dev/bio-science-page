@@ -3,9 +3,8 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Life Science Academy - 고등학교 생명과학 가이드</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Life Science Academy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -29,6 +28,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -39,30 +39,87 @@
       overflow-x: hidden;
     }
 
+    /* Layout - Mobile First */
     #app {
-      display: grid;
-      grid-template-columns: 280px 1fr;
+      display: block;
       min-height: 100vh;
+      padding-top: 60px;
     }
 
-    aside {
-      background-color: var(--bg-dark);
-      border-right: 1px solid var(--glass-border);
-      padding: 2rem;
-      position: sticky;
+    /* Mobile Header */
+    .mobile-header {
+      display: flex;
+      position: fixed;
       top: 0;
-      height: 100vh;
-      overflow-y: auto;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: var(--bg-dark);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 0 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 2000;
     }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 2.5rem;
+    .mobile-header .logo {
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-size: 1.25rem;
+    }
+
+    .menu-btn {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 2100;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-main);
+      transition: 0.3s;
+    }
+
+    .menu-btn.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-btn.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Sidebar - Mobile Default (Hidden) */
+    aside {
+      position: fixed;
+      left: -280px;
+      top: 60px;
+      width: 280px;
+      height: calc(100vh - 60px);
+      background-color: var(--bg-dark);
+      border-right: 1px solid var(--glass-border);
+      padding: 2rem;
+      z-index: 1500;
+      transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+      box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
+    }
+
+    aside.open {
+      left: 0;
     }
 
     .nav-section {
@@ -102,40 +159,40 @@
       font-weight: 600;
     }
 
+    /* Main Content */
     main {
-      padding: 3rem;
+      padding: 1.5rem;
       max-width: 1000px;
       margin: 0 auto;
       width: 100%;
     }
 
     .hero {
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
       text-align: center;
     }
 
     .hero h1 {
-      font-size: 3rem;
+      font-size: 2rem;
       font-weight: 800;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       background: linear-gradient(135deg, var(--primary), var(--secondary));
-      background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero p {
-      font-size: 1.25rem;
+      font-size: 1rem;
       color: var(--text-muted);
     }
 
     .content-section {
       display: none;
-      animation: fadeIn 0.5s ease-out;
     }
 
     .content-section.active {
       display: block;
+      animation: fadeIn 0.4s ease-out;
     }
 
     @keyframes fadeIn {
@@ -152,28 +209,23 @@
 
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
     }
 
     .card {
       background: var(--card-bg);
       border: 1px solid var(--glass-border);
       border-radius: 1rem;
-      padding: 1.5rem;
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      padding: 1.25rem;
       cursor: pointer;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary);
     }
 
     .card h3 {
       color: var(--primary);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
     }
 
     .card ul {
@@ -183,9 +235,9 @@
     }
 
     .card li {
-      margin-bottom: 0.4rem;
-      position: relative;
+      margin-bottom: 0.3rem;
       padding-left: 1rem;
+      position: relative;
     }
 
     .card li::before {
@@ -195,34 +247,30 @@
       color: var(--primary);
     }
 
+    /* Modal */
     .modal {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(2, 6, 23, 0.9);
-      backdrop-filter: blur(8px);
+      background: rgba(2, 6, 23, 0.95);
+      backdrop-filter: blur(10px);
       display: none;
       justify-content: center;
       align-items: center;
-      z-index: 1000;
+      z-index: 3000;
     }
 
     .modal-content {
       background-color: var(--bg-dark);
-      padding: 3rem;
-      border-radius: 1.5rem;
-      max-width: 800px;
-      width: 90%;
-      max-height: 80vh;
+      padding: 1.5rem;
+      width: 100%;
+      height: 100%;
       overflow-y: auto;
-      border: 1px solid var(--glass-border);
       position: relative;
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
-      transition: background-image 0.3s ease;
     }
 
     .modal-content::before {
@@ -232,8 +280,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
-      border-radius: 1.5rem;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
       z-index: 1;
     }
 
@@ -242,31 +289,83 @@
       z-index: 2;
     }
 
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      line-height: 1;
+    }
+
+    /* Desktop Overrides */
+    @media (min-width: 1025px) {
+      .mobile-header {
+        display: none;
+      }
+
+      #app {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        padding-top: 0;
+      }
+
+      aside {
+        position: sticky;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        box-shadow: none;
+      }
+
+      main {
+        padding: 3rem;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .modal-content {
+        width: 90%;
+        height: auto;
+        max-width: 800px;
+        max-height: 80vh;
+        border-radius: 1.5rem;
+        padding: 3rem;
+        border: 1px solid var(--glass-border);
+      }
+
+      .modal-content::before {
+        border-radius: 1.5rem;
+      }
+    }
+
+    /* History Specific */
     .history-detail section {
-      margin-bottom: 2rem;
-      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
       background: rgba(255, 255, 255, 0.03);
-      border-radius: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.75rem;
     }
 
     .history-detail h4 {
       color: var(--primary);
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .history-detail ul {
-      list-style: none;
+      margin-bottom: 0.5rem;
     }
 
     .history-detail li {
-      margin-bottom: 0.6rem;
-      padding-left: 1.2rem;
+      margin-bottom: 0.4rem;
+      padding-left: 1rem;
       position: relative;
+      list-style: none;
     }
 
     .history-detail li::before {
@@ -275,148 +374,20 @@
       left: 0;
       color: var(--primary);
     }
-
-    .close-modal {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--text-muted);
-    }
-
-    .close-modal:hover {
-      color: var(--text-main);
-    }
-
-    @media (max-width: 1024px) {
-      #app {
-        grid-template-columns: 1fr;
-        padding-top: 60px;
-      }
-
-      aside {
-        position: fixed;
-        left: -280px;
-        top: 60px;
-        width: 280px;
-        z-index: 100;
-        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
-      }
-
-      aside.open {
-        left: 0;
-      }
-
-      .mobile-header {
-        display: flex;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 60px;
-        background: var(--bg-dark);
-        border-bottom: 1px solid var(--glass-border);
-        padding: 0 1.5rem;
-        align-items: center;
-        justify-content: space-between;
-        z-index: 1000;
-      }
-
-      .mobile-header .logo {
-        margin-bottom: 0;
-        font-size: 1.25rem;
-      }
-
-      .menu-btn {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 10px;
-      }
-
-      .menu-btn span {
-        display: block;
-        width: 24px;
-        height: 2px;
-        background: var(--text-main);
-        transition: 0.3s;
-      }
-
-      .menu-btn.active span:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
-      }
-
-      .menu-btn.active span:nth-child(2) {
-        opacity: 0;
-      }
-
-      .menu-btn.active span:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
-      }
-
-      main {
-        padding: 1.5rem;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .modal-content {
-        width: 100%;
-        height: 100%;
-        max-height: 100vh;
-        border-radius: 0;
-        padding: 2rem 1.5rem;
-      }
-
-      .modal-content::before {
-        border-radius: 0;
-      }
-    }
-
-    @media (min-width: 1025px) {
-      .mobile-header {
-        display: none;
-      }
-    }
   </style>
 </head>
 
 <body>
   <header class="mobile-header">
-    <div class="logo">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 11c0 3.511-2.358 6.511-5.69 7.425a8.558 8.558 0 0 1-1.011-2.425C5.3 12.5 8 9 12 11Z" />
-        <path d="M12 13c0-3.511 2.358-6.511 5.69-7.425a8.558 8.558 0 0 1 1.011 2.425C18.7 11.5 16 15 12 13Z" />
-        <circle cx="12" cy="12" r="10" />
-      </svg>
-      BioAcademy
-    </div>
+    <div class="logo">BioAcademy</div>
     <button id="menu-toggle" class="menu-btn">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
   </header>
-  <div id="app">
-    <aside>
-      <div class="logo">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 11c0 3.511-2.358 6.511-5.69 7.425a8.558 8.558 0 0 1-1.011-2.425C5.3 12.5 8 9 12 11Z" />
-          <path d="M12 13c0-3.511 2.358-6.511 5.69-7.425a8.558 8.558 0 0 1 1.011 2.425C18.7 11.5 16 15 12 13Z" />
-          <circle cx="12" cy="12" r="10" />
-        </svg>
-        BioAcademy
-      </div>
 
+  <div id="app">
+    <aside id="sidebar-menu">
+      <div class="logo" style="display:none">BioAcademy</div>
       <div class="nav-section">
         <div class="nav-title">과목 선택</div>
         <ul class="nav-list">
@@ -424,44 +395,126 @@
           <li class="nav-item" data-subject="bio2">생명과학 II</li>
         </ul>
       </div>
-
-      <div id="toc-container" class="nav-section">
+      <div class="nav-section">
         <div class="nav-title">목차</div>
-        <ul class="nav-list" id="toc-list">
-          <!-- Dynamically filled -->
-        </ul>
+        <ul class="nav-list" id="toc-list"></ul>
       </div>
     </aside>
 
     <main>
       <section class="hero">
         <h1>Explore the World of Life</h1>
-        <p>고등학생들을 위한 생명과학 핵심 요약 가이드</p>
+        <p>고등학생을 위한 생명과학 핵심 가이드</p>
       </section>
-
       <section id="content-bio1" class="content-section active">
-        <h2>생명과학 I</h2>
-        <div class="card-grid" id="grid-bio1">
-          <!-- Cards filled by JS -->
-        </div>
+        <div class="card-grid" id="grid-bio1"></div>
       </section>
-
       <section id="content-bio2" class="content-section">
-        <h2>생명과학 II</h2>
-        <div class="card-grid" id="grid-bio2">
-          <!-- Cards filled by JS -->
-        </div>
+        <div class="card-grid" id="grid-bio2"></div>
       </section>
     </main>
 
     <div class="modal" id="info-modal">
       <div class="modal-content">
-        <span class="close-modal">&times;</span>
+        <span class="close-modal" id="close-btn">&times;</span>
         <div id="modal-body"></div>
       </div>
     </div>
   </div>
-  <script type="module" src="./src/main.js"></script>
+
+  <script>
+    (function () {
+      const bioData = {
+        bio1: {
+          title: '생명과학 I', chapters: [
+            { id: 'b1-1', title: 'I. 생명 과학의 이해', topics: ['생물의 특성', '탐구 방법'], detail: '<h3>생물의 특성</h3><ul><li>세포 구성</li><li>물질대사</li><li>항상성</li></ul>' },
+            { id: 'b1-2', title: 'II. 사람의 물질대사', topics: ['세포 호흡', '건강'], detail: '<h3>세포 호흡</h3><p>에너지를 얻는 과정입니다.</p>' },
+            { id: 'b1-3', title: 'III. 항상성과 몸의 조절', topics: ['신경계', '호르몬'], detail: '<h3>항상성</h3><p>상태를 일정하게 유지합니다.</p>' },
+            { id: 'b1-4', title: 'IV. 유전', topics: ['염색체', '가계도'], detail: '<h3>유전</h3><p>유전 원리를 배웁니다.</p>' },
+            { id: 'b1-5', title: 'V. 생태계', topics: ['생태계 평형'], detail: '<h3>생태계</h3><p>상호 작용을 다룹니다.</p>' }
+          ]
+        },
+        bio2: {
+          title: '생명과학 II', chapters: [
+            { id: 'b2-1', title: '1. 생명 과학의 역사', topics: ['세포 발견', 'DNA 규명'], bgImage: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&q=80&w=1000', detail: '<div class="history-detail"><section><h4>🔬 주요 발견</h4><ul><li>로버트 훅: 세포 명명</li><li>멘델: 유전 법칙</li><li>왓슨&크릭: DNA 구조</li></ul></section></div>' },
+            { id: 'b2-2', title: '2. 세포의 특성', topics: ['세포 소기관'], detail: '<h3>세포</h3><p>구조와 기능을 배웁니다.</p>' },
+            { id: 'b2-3', title: '3. 에너지 대사', topics: ['광합성', '호흡'], detail: '<h3>대사</h3><p>에너지 흐름을 다룹니다.</p>' },
+            { id: 'b2-4', title: '4. 유전자 발현', topics: ['DNA 복제', '번역'], detail: '<h3>분자 생물학</h3><p>정보 흐름을 배웁니다.</p>' },
+            { id: 'b2-5', title: '5. 진화와 다양성', topics: ['분류', '진화'], detail: '<h3>진화</h3><p>다양성을 이해합니다.</p>' },
+            { id: 'b2-6', title: '6. 생명 공학', topics: ['유전자 재조합'], detail: '<h3>기술</h3><p>현대 기술을 다룹니다.</p>' }
+          ]
+        }
+      };
+
+      let currentSubject = 'bio1';
+      const menuToggle = document.getElementById('menu-toggle');
+      const aside = document.getElementById('sidebar-menu');
+
+      function render() {
+        const toc = document.getElementById('toc-list');
+        const g1 = document.getElementById('grid-bio1');
+        const g2 = document.getElementById('grid-bio2');
+
+        toc.innerHTML = ''; g1.innerHTML = ''; g2.innerHTML = '';
+
+        bioData.bio1.chapters.forEach(ch => {
+          g1.appendChild(createCard(ch));
+          if (currentSubject === 'bio1') toc.appendChild(createNav(ch));
+        });
+        bioData.bio2.chapters.forEach(ch => {
+          g2.appendChild(createCard(ch));
+          if (currentSubject === 'bio2') toc.appendChild(createNav(ch));
+        });
+
+        document.getElementById('content-bio1').classList.toggle('active', currentSubject === 'bio1');
+        document.getElementById('content-bio2').classList.toggle('active', currentSubject === 'bio2');
+      }
+
+      function createCard(ch) {
+        const el = document.createElement('div'); el.className = 'card';
+        el.innerHTML = `<h3>${ch.title}</h3><ul>${ch.topics.map(t => `<li>${t}</li>`).join('')}</ul>`;
+        el.onclick = () => openModal(ch);
+        return el;
+      }
+
+      function createNav(ch) {
+        const el = document.createElement('li'); el.className = 'nav-item'; el.innerText = ch.title;
+        el.onclick = () => { openModal(ch); closeSidebar(); };
+        return el;
+      }
+
+      function openModal(ch) {
+        document.getElementById('modal-body').innerHTML = `<h2>${ch.title}</h2><hr style="margin:1rem 0; opacity:0.1">${ch.detail}`;
+        const content = document.querySelector('.modal-content');
+        content.style.backgroundImage = ch.bgImage ? `url(${ch.bgImage})` : 'none';
+        document.getElementById('info-modal').style.display = 'flex';
+      }
+
+      function closeSidebar() {
+        if (window.innerWidth <= 1024) { aside.classList.remove('open'); menuToggle.classList.remove('active'); }
+      }
+
+      menuToggle.onclick = () => {
+        aside.classList.toggle('open');
+        menuToggle.classList.toggle('active');
+      };
+
+      document.getElementById('close-btn').onclick = () => document.getElementById('info-modal').style.display = 'none';
+      window.onclick = (e) => { if (e.target.id === 'info-modal') document.getElementById('info-modal').style.display = 'none'; };
+
+      document.querySelectorAll('.nav-item[data-subject]').forEach(item => {
+        item.onclick = () => {
+          document.querySelectorAll('.nav-item[data-subject]').forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+          currentSubject = item.getAttribute('data-subject');
+          render();
+          closeSidebar();
+        };
+      });
+
+      render();
+    })();
+  </script>
 </body>
 
 </html>
