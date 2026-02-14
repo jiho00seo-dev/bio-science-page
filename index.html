@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -24,27 +23,11 @@
       --secondary: #0ea5e9;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      font-family: var(--font-sans);
-      background-color: var(--bg-darker);
-      color: var(--text-main);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body { font-family: var(--font-sans); background-color: var(--bg-darker); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
     /* Layout - Mobile First */
-    #app {
-      display: block;
-      min-height: 100vh;
-      padding-top: 60px;
-    }
+    #app { display: block; min-height: 100vh; padding-top: 60px; }
 
     /* Mobile Header */
     .mobile-header {
@@ -62,45 +45,15 @@
       z-index: 2000;
     }
 
-    .mobile-header .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 800;
-      color: var(--primary);
-      font-size: 1.25rem;
-    }
+    .mobile-header .logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; color: var(--primary); font-size: 1.25rem; }
 
     .menu-btn {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 10px;
-      z-index: 2100;
+      display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 10px; z-index: 2100;
     }
-
-    .menu-btn span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-main);
-      transition: 0.3s;
-    }
-
-    .menu-btn.active span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-
-    .menu-btn.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .menu-btn.active span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
+    .menu-btn span { display: block; width: 24px; height: 2px; background: var(--text-main); transition: 0.3s; }
+    .menu-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-btn.active span:nth-child(2) { opacity: 0; }
+    .menu-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* Sidebar - Mobile Default (Hidden) */
     aside {
@@ -117,266 +70,62 @@
       overflow-y: auto;
       box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
     }
+    aside.open { left: 0; }
 
-    aside.open {
-      left: 0;
-    }
-
-    .nav-section {
-      margin-bottom: 2rem;
-    }
-
-    .nav-title {
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-
-    .nav-list {
-      list-style: none;
-    }
-
-    .nav-item {
-      padding: 0.75rem 1rem;
-      margin: 0.25rem 0;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    .nav-item:hover {
-      background-color: var(--glass-bg);
-      color: var(--text-main);
-    }
-
-    .nav-item.active {
-      background-color: var(--primary);
-      color: white;
-      font-weight: 600;
-    }
+    .nav-section { margin-bottom: 2rem; }
+    .nav-title { text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 1rem; }
+    .nav-list { list-style: none; }
+    .nav-item { padding: 0.75rem 1rem; margin: 0.25rem 0; border-radius: 0.5rem; cursor: pointer; transition: all 0.2s ease; color: var(--text-muted); font-size: 0.95rem; }
+    .nav-item:hover { background-color: var(--glass-bg); color: var(--text-main); }
+    .nav-item.active { background-color: var(--primary); color: white; font-weight: 600; }
 
     /* Main Content */
-    main {
-      padding: 1.5rem;
-      max-width: 1000px;
-      margin: 0 auto;
-      width: 100%;
-    }
+    main { padding: 1.5rem; max-width: 1000px; margin: 0 auto; width: 100%; }
+    .hero { margin-bottom: 3rem; text-align: center; }
+    .hero h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1rem; color: var(--text-muted); }
 
-    .hero {
-      margin-bottom: 3rem;
-      text-align: center;
-    }
+    .content-section { display: none; }
+    .content-section.active { display: block; animation: fadeIn 0.4s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    .hero h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      font-size: 1rem;
-      color: var(--text-muted);
-    }
-
-    .content-section {
-      display: none;
-    }
-
-    .content-section.active {
-      display: block;
-      animation: fadeIn 0.4s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 1rem;
-      padding: 1.25rem;
-      cursor: pointer;
-    }
-
-    .card h3 {
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
-    }
-
-    .card ul {
-      list-style: none;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .card li {
-      margin-bottom: 0.3rem;
-      padding-left: 1rem;
-      position: relative;
-    }
-
-    .card li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-    }
+    .card-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.5rem; }
+    .card { background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 1rem; padding: 1.25rem; cursor: pointer; }
+    .card h3 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .card ul { list-style: none; font-size: 0.9rem; color: var(--text-muted); }
+    .card li { margin-bottom: 0.3rem; padding-left: 1rem; position: relative; }
+    .card li::before { content: '→'; position: absolute; left: 0; color: var(--primary); }
 
     /* Modal */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(2, 6, 23, 0.95);
-      backdrop-filter: blur(10px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 3000;
-    }
-
-    .modal-content {
-      background-color: var(--bg-dark);
-      padding: 1.5rem;
-      width: 100%;
-      height: 100%;
-      overflow-y: auto;
-      position: relative;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .modal-content::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
-      z-index: 1;
-    }
-
-    .modal-content>* {
-      position: relative;
-      z-index: 2;
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      font-size: 2rem;
-      cursor: pointer;
-      color: var(--text-muted);
-      line-height: 1;
-    }
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(10px); display: none; justify-content: center; align-items: center; z-index: 3000; }
+    .modal-content { background-color: var(--bg-dark); padding: 1.5rem; width: 100%; height: 100%; overflow-y: auto; position: relative; background-size: cover; background-position: center; border: none; }
+    .modal-content::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%); z-index: 1; }
+    .modal-content > * { position: relative; z-index: 2; }
+    .close-modal { position: absolute; top: 1rem; right: 1rem; font-size: 2.5rem; cursor: pointer; color: var(--text-main); line-height: 1; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
+    
+    .modal-body h2 { font-size: 1.75rem; color: var(--primary); margin-bottom: 1rem; }
+    .modal-body h3 { font-size: 1.25rem; color: var(--secondary); margin: 1.5rem 0 0.75rem; }
+    .modal-body p { margin-bottom: 1rem; color: var(--text-main); font-size: 1.05rem; }
+    .modal-body ul { margin-bottom: 1.5rem; padding-left: 1.25rem; }
+    .modal-body li { margin-bottom: 0.5rem; color: var(--text-main); position: relative; list-style: none; }
+    .modal-body li::before { content: "•"; color: var(--primary); position: absolute; left: -1.25rem; font-weight: bold; }
 
     /* Desktop Overrides */
     @media (min-width: 1025px) {
-      .mobile-header {
-        display: none;
-      }
-
-      #app {
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        padding-top: 0;
-      }
-
-      aside {
-        position: sticky;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100vh;
-        box-shadow: none;
-      }
-
-      main {
-        padding: 3rem;
-      }
-
-      .hero h1 {
-        font-size: 3rem;
-      }
-
-      .card-grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .modal-content {
-        width: 90%;
-        height: auto;
-        max-width: 800px;
-        max-height: 80vh;
-        border-radius: 1.5rem;
-        padding: 3rem;
-        border: 1px solid var(--glass-border);
-      }
-
-      .modal-content::before {
-        border-radius: 1.5rem;
-      }
+      .mobile-header { display: none; }
+      #app { display: grid; grid-template-columns: 280px 1fr; padding-top: 0; }
+      aside { position: sticky; left: 0; top: 0; width: 100%; height: 100vh; box-shadow: none; }
+      main { padding: 3rem; }
+      .hero h1 { font-size: 3rem; }
+      .card-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+      .modal-content { width: 90%; height: auto; max-width: 900px; max-height: 85vh; border-radius: 2rem; padding: 4rem; border: 1px solid var(--glass-border); }
+      .modal-content::before { border-radius: 2rem; }
     }
 
-    /* History Specific */
-    .history-detail section {
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 0.75rem;
-    }
-
-    .history-detail h4 {
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .history-detail li {
-      margin-bottom: 0.4rem;
-      padding-left: 1rem;
-      position: relative;
-      list-style: none;
-    }
-
-    .history-detail li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-    }
+    /* Specialized sections */
+    .highlight-card { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--primary); border-radius: 0.75rem; padding: 1rem; margin: 1rem 0; }
   </style>
 </head>
-
 <body>
   <header class="mobile-header">
     <div class="logo">BioAcademy</div>
@@ -417,7 +166,7 @@
     <div class="modal" id="info-modal">
       <div class="modal-content">
         <span class="close-modal" id="close-btn">&times;</span>
-        <div id="modal-body"></div>
+        <div id="modal-body" class="modal-body"></div>
       </div>
     </div>
   </div>
@@ -427,21 +176,192 @@
       const bioData = {
         bio1: {
           title: '생명과학 I', chapters: [
-            { id: 'b1-1', title: 'I. 생명 과학의 이해', topics: ['생물의 특성', '탐구 방법'], detail: '<h3>생물의 특성</h3><ul><li>세포 구성</li><li>물질대사</li><li>항상성</li></ul>' },
-            { id: 'b1-2', title: 'II. 사람의 물질대사', topics: ['세포 호흡', '건강'], detail: '<h3>세포 호흡</h3><p>에너지를 얻는 과정입니다.</p>' },
-            { id: 'b1-3', title: 'III. 항상성과 몸의 조절', topics: ['신경계', '호르몬'], detail: '<h3>항상성</h3><p>상태를 일정하게 유지합니다.</p>' },
-            { id: 'b1-4', title: 'IV. 유전', topics: ['염색체', '가계도'], detail: '<h3>유전</h3><p>유전 원리를 배웁니다.</p>' },
-            { id: 'b1-5', title: 'V. 생태계', topics: ['생태계 평형'], detail: '<h3>생태계</h3><p>상호 작용을 다룹니다.</p>' }
+            { 
+              id: 'b1-1', title: 'I. 생명 과학의 이해', topics: ['생물의 특성', '생명 과학의 탐구'], 
+              bgImage: 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=1200',
+              detail: `
+                <h3>1. 생물의 특성</h3>
+                <p>생명체는 무생물과 구별되는 고유한 특성을 가집니다.</p>
+                <ul>
+                  <li><strong>세포로 구성:</strong> 모든 생물은 기능적, 구조적 단위인 세포로 이루어져 있습니다.</li>
+                  <li><strong>물질대사:</strong> 생명체 내에서 일어나는 모든 화학 반응입니다. (동화작용: 에너지 저장, 이화작용: 에너지 방출)</li>
+                  <li><strong>자극에 대한 반응과 항상성:</strong> 환경 변화를 감지하고 체온, 혈당량 등을 일정하게 유지합니다.</li>
+                  <li><strong>발생과 생장:</strong> 수정란이 개체가 되고, 세포 분열을 통해 크기가 자랍니다.</li>
+                  <li><strong>생식과 유전:</strong> 자손을 남기고 부모의 형질을 전달합니다.</li>
+                  <li><strong>적응과 진화:</strong> 환경에 생존하기 유리한 체형이나 기능으로 대를 이어 변해갑니다.</li>
+                </ul>
+                <div class="highlight-card">
+                  <strong>💡 핵심 팁:</strong> 바이러스는 세포 구조가 없고 스스로 물질대사를 못 하는 등 생물과 무생물의 중간 단계 특성을 보입니다.
+                </div>
+              `
+            },
+            { 
+              id: 'b1-2', title: 'II. 사람의 물질대사', topics: ['세포 호흡과 에너지', '기관계의 통합적 작용'], 
+              bgImage: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1200',
+              detail: `
+                <h3>1. 세포 호흡과 ATP</h3>
+                <p>세포에서 포도당과 같은 영양소를 분해하여 생명 활동에 필요한 에너지를 얻는 과정입니다.</p>
+                <ul>
+                  <li><strong>ATP (아데노신 3인산):</strong> 생명체의 '에너지 화폐' 역할을 합니다.</li>
+                  <li><strong>미토콘드리아:</strong> 세포 호흡이 주로 일어나는 장소입니다.</li>
+                </ul>
+                <h3>2. 기관계의 통합적 작용</h3>
+                <p>음식물을 소화하여 흡수(소화계), 산소를 받아들여 이산화탄소를 배출(호흡계), 영양소와 산소를 온몸으로 운반(순환계), 노폐물을 배설(배설계)하는 과정이 서로 유기적으로 연결되어 있습니다.</p>
+              `
+            },
+            { 
+              id: 'b1-3', title: 'III. 항상성과 몸의 조절', topics: ['신경계', '호르몬과 항상성 유지'], 
+              bgImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=1200',
+              detail: `
+                <h3>1. 신경계의 조절</h3>
+                <ul>
+                  <li><strong>뉴런:</strong> 신경계의 기본 단위 (감각, 연합, 운동 뉴런)</li>
+                  <li><strong>중추 신경계:</strong> 뇌(대뇌, 간뇌, 소뇌, 연수)와 척수로 구성</li>
+                  <li><strong>자율 신경계:</strong> 교감 신경(긴장, 에너지 소모)과 부교감 신경(안정, 에너지 보존)</li>
+                </ul>
+                <h3>2. 항상성 유지 원리</h3>
+                <p>간뇌의 시상하부가 조절 중추 역할을 하여 혈당량, 체온, 삼투압을 일정하게 조절합니다.</p>
+                <div class="highlight-card">
+                  <strong>주요 호르몬:</strong> 인슐린(혈당 낮춤), 글루카곤(혈당 높임), ADH(수분 재흡수 촉진)
+                </div>
+              `
+            },
+            { 
+              id: 'b1-4', title: 'IV. 유전', topics: ['유전 정보와 염색체', '사람의 유전'], 
+              bgImage: 'https://images.unsplash.com/photo-1541176214227-9c990264b39b?q=80&w=1200',
+              detail: `
+                <h3>1. 염색체와 유전자</h3>
+                <p>DNA가 단백질과 결합하여 염색체를 형성하며, 특정 부위에 유전 정보가 위치합니다.</p>
+                <ul>
+                  <li><strong>상동 염색체:</strong> 모양과 크기가 같은 한 쌍의 염색체</li>
+                  <li><strong>세포 분열:</strong> 체세포 분열(성장)과 감수 분열(생식 세포 형성)</li>
+                </ul>
+                <h3>2. 사람의 유전 현상</h3>
+                <p>멘델의 유전 원리를 기본으로 하며, 성염색체에 의한 반성 유전과 여러 대립 유전자가 관여하는 다인자 유전 등이 있습니다.</p>
+              `
+            },
+            { 
+              id: 'b1-5', title: 'V. 생태계와 상호 작용', topics: ['생태계 구성', '에너지 흐름과 순환'], 
+              bgImage: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200',
+              detail: `
+                <h3>1. 생태계의 구성</h3>
+                <p>생물적 요인(생산자, 소비자, 분해자)과 비생물적 요인(빛, 온도, 물, 토양)으로 나뉩니다.</p>
+                <h3>2. 에너지 흐름과 물질 순환</h3>
+                <ul>
+                  <li><strong>에너지:</strong> 먹이 사슬을 따라 이동하며 열에너지로 방출되어 순환하지 않습니다.</li>
+                  <li><strong>탄소/질소 순환:</strong> 생물체와 환경 사이를 계속해서 순환합니다.</li>
+                </ul>
+                <p>생태계 평형은 생물 다양성이 높을수록 더 안정적으로 유지됩니다.</p>
+              `
+            }
           ]
         },
         bio2: {
           title: '생명과학 II', chapters: [
-            { id: 'b2-1', title: '1. 생명 과학의 역사', topics: ['세포 발견', 'DNA 규명'], bgImage: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&q=80&w=1000', detail: '<div class="history-detail"><section><h4>🔬 주요 발견</h4><ul><li>로버트 훅: 세포 명명</li><li>멘델: 유전 법칙</li><li>왓슨&크릭: DNA 구조</li></ul></section></div>' },
-            { id: 'b2-2', title: '2. 세포의 특성', topics: ['세포 소기관'], detail: '<h3>세포</h3><p>구조와 기능을 배웁니다.</p>' },
-            { id: 'b2-3', title: '3. 에너지 대사', topics: ['광합성', '호흡'], detail: '<h3>대사</h3><p>에너지 흐름을 다룹니다.</p>' },
-            { id: 'b2-4', title: '4. 유전자 발현', topics: ['DNA 복제', '번역'], detail: '<h3>분자 생물학</h3><p>정보 흐름을 배웁니다.</p>' },
-            { id: 'b2-5', title: '5. 진화와 다양성', topics: ['분류', '진화'], detail: '<h3>진화</h3><p>다양성을 이해합니다.</p>' },
-            { id: 'b2-6', title: '6. 생명 공학', topics: ['유전자 재조합'], detail: '<h3>기술</h3><p>현대 기술을 다룹니다.</p>' }
+            { 
+              id: 'b2-1', title: '1. 생명 과학의 역사', topics: ['초기 세포 발견', '현대 생물학의 탄생'], 
+              bgImage: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=1200',
+              detail: `
+                <h3>생명 관찰의 시작</h3>
+                <p>인류가 생명의 근원을 탐구해온 혁신적인 순간들입니다.</p>
+                <div class="history-detail">
+                  <section>
+                    <h4>🔬 현미경과 세포설</h4>
+                    <ul>
+                      <li><strong>로버트 훅:</strong> 1665년 현미경으로 코르크 세포 관찰 및 'Cell' 명명</li>
+                      <li><strong>슐라이덴 & 슈반:</strong> 모든 생물은 세포로 이루어져 있다는 세포설 확립</li>
+                    </ul>
+                  </section>
+                  <section>
+                    <h4>🧬 유전과 진화의 기틀</h4>
+                    <ul>
+                      <li><strong>다윈:</strong> 1859년 '종의 기원' 출판, 자연 선택설 제안</li>
+                      <li><strong>멘델:</strong> 완두콩 실험을 통한 유전 법칙 발견</li>
+                    </ul>
+                  </section>
+                  <section>
+                    <h4>🛰️ 분자 생물학의 정점</h4>
+                    <ul>
+                      <li><strong>왓슨 & 크릭:</strong> 1953년 DNA 이중 나선 구조 규명</li>
+                      <li><strong>윌머트:</strong> 1996년 최초의 복제 양 '돌리' 탄생</li>
+                    </ul>
+                  </section>
+                </div>
+              `
+            },
+            { 
+              id: 'b2-2', title: '2. 세포의 특성', topics: ['세포 소기관', '세포막의 물질 이동'], 
+              bgImage: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200',
+              detail: `
+                <h3>1. 세포의 구조와 기능</h3>
+                <p>진핵세포는 다양한 막 구조물을 통해 기능을 분담합니다.</p>
+                <ul>
+                  <li><strong>핵:</strong> 유전 정보를 저장하고 세포 활동을 조절합니다.</li>
+                  <li><strong>리보솜:</strong> 단백질 합성이 일어나는 곳입니다.</li>
+                  <li><strong>골지체:</strong> 단백질을 가공하여 세포 밖으로 분비합니다.</li>
+                  <li><strong>리소좀:</strong> 세포 내 소화를 담당합니다.</li>
+                </ul>
+                <h3>2. 세포막을 통한 물질 이동</h3>
+                <p>확산, 삼투, 능동 수송 및 세포 내 섭취/외 배출을 통해 농도 조절과 영양분 흡수를 수행합니다.</p>
+              `
+            },
+            { 
+              id: 'b2-3', title: '3. 세포 호흡과 광합성', topics: ['효소', '에너지 대사 과정'], 
+              bgImage: 'https://images.unsplash.com/photo-1471193945509-9ad0617afabf?q=80&w=1200',
+              detail: `
+                <h3>1. 효소의 작용</h3>
+                <p>생체 촉매로서 활성화 에너지를 낮추어 화학 반응 속도를 빠르게 합니다.</p>
+                <h3>2. 에너지 추출과 저장</h3>
+                <ul>
+                  <li><strong>세포 호흡:</strong> 해당 과정 - TCA 회로 - 전자 전달계를 거쳐 ATP를 생성합니다.</li>
+                  <li><strong>광합성:</strong> 명반응(빛 에너지 흡수)과 탄소 고정 반응(포도당 합성)으로 진행됩니다.</li>
+                </ul>
+                <p>두 과정은 지구 생태계의 에너지 순환을 지탱하는 핵심 반응입니다.</p>
+              `
+            },
+            { 
+              id: 'b2-4', title: '4. 유전자의 발현과 조절', topics: ['DNA 복제', '전사와 번역'], 
+              bgImage: 'https://images.unsplash.com/photo-1541176214227-9c990264b39b?q=80&w=1200',
+              detail: `
+                <h3>1. DNA에서 단백질까지</h3>
+                <p>생명 정보의 중심 원리 (Central Dogma)에 따라 정보가 흐릅니다.</p>
+                <ul>
+                  <li><strong>복제:</strong> DNA 정보를 정확하게 복제하여 보존합니다.</li>
+                  <li><strong>전사:</strong> DNA 정보를 RNA로 옮기는 과정입니다.</li>
+                  <li><strong>번역:</strong> mRNA 정보를 해독하여 아미노산을 연결, 단백질을 만듭니다.</li>
+                </ul>
+                <div class="highlight-card">
+                  원핵생물의 오페론 모델과 진핵생물의 전사 조절 기작을 통해 특정 시기에 필요한 단백질만을 생산합니다.
+                </div>
+              `
+            },
+            { 
+              id: 'b2-5', title: '5. 생물의 진화와 다양성', topics: ['분류 체계', '진화의 증거'], 
+              bgImage: 'https://images.unsplash.com/photo-1502481851512-e9e2529bbbf9?q=80&w=1200',
+              detail: `
+                <h3>1. 진화의 원동력</h3>
+                <p>돌연변이, 유전자 흐름, 자연 선택 등에 의해 생물 집단의 유전자 빈도가 변화합니다.</p>
+                <h3>2. 생물의 분류</h3>
+                <ul>
+                  <li><strong>표준화된 분류 단위:</strong> 종-속-과-목-강-문-계</li>
+                  <li><strong>3역 6계:</strong> 진핵생물역, 진정세균역, 고세균역 등의 체계를 배웁니다.</li>
+                </ul>
+              `
+            },
+            { 
+              id: 'b2-6', title: '6. 생명 공학 기술', topics: ['유전자 재조합', '줄기 세포'], 
+              bgImage: 'https://images.unsplash.com/photo-1563192033-c915c62829b2?q=80&w=1200',
+              detail: `
+                <h3>1. 현대 생명 공학 핵심</h3>
+                <ul>
+                  <li><strong>유전자 재조합:</strong> 특정 유전자를 다른 DNA에 삽입하여 유용한 물질을 생산합니다.</li>
+                  <li><strong>PCR (중합효소 연쇄 반응):</strong> 미량의 DNA를 대량으로 복제합니다.</li>
+                  <li><strong>유전자 가위 (CRISPR):</strong> 특정 유전 부위를 정확하게 자르고 교정합니다.</li>
+                </ul>
+                <h3>2. 생명 윤리</h3>
+                <p>기술의 발전과 함께 인간 복제, 유전자 변형 식품(GMO) 등에 대한 윤리적 성찰이 필요합니다.</p>
+              `
+            }
           ]
         }
       };
@@ -486,7 +406,7 @@
       function openModal(ch) {
         document.getElementById('modal-body').innerHTML = `<h2>${ch.title}</h2><hr style="margin:1rem 0; opacity:0.1">${ch.detail}`;
         const content = document.querySelector('.modal-content');
-        content.style.backgroundImage = ch.bgImage ? `url(${ch.bgImage})` : 'none';
+        content.style.backgroundImage = ch.bgImage ? \`url(\${ch.bgImage})\` : 'none';
         document.getElementById('info-modal').style.display = 'flex';
       }
 
@@ -516,5 +436,4 @@
     })();
   </script>
 </body>
-
 </html>
